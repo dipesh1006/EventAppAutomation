@@ -11,3 +11,4 @@ function getRequiredEnv(key: string): string{
 }
 
 export const BASE_URL = getRequiredEnv("BASE_URL");
+export const API_BASE_URL = getRequiredEnv("API_BASE_URL");

@@ -1,0 +1,11 @@
+{
+  "title": "Tech Summit 2026",
+  "description": "A premier technology conference.",
+  "category": "Conference",
+  "venue": "Newtown conference Centre",
+  "city": "Kolkata",
+  "eventDate": "2026-09-15T09:00:00.000Z",
+  "price": 1000,
+  "totalSeats": 150,
+  "imageUrl": ""
+}

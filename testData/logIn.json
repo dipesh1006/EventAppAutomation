@@ -1,0 +1,24 @@
+{
+    "validCredentials": [
+        {
+            "username": "dipesh16pal@gmail.com",
+            "password": "Dipesh1234@"
+        },
+        {
+            "username": "dipesh98pal@gmail.com",
+            "password": "Dipesh1234@"
+        }
+    ],
+    "invalidCredentials": [
+        {
+            "username": "dipesh16pal@gmail.com",
+            "password": "wrongpassword",
+            "msg": "Invalid email or password"
+        },
+        {
+            "username": "dipeshpal@gmail.com",
+            "password": "Dipesh1234@",
+            "msg": "Invalid email or password"
+        }
+    ]
+}

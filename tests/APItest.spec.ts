@@ -1,11 +1,13 @@
 import { test, expect, request } from '@playwright/test';
 import { API_BASE_URL } from '../utils/fetchenv';
-import { ObjectManager } from '../pageObjects/ObjectManager';
 import LoginAPI from '../testData/apiRequest/LoginAPI.json';
 import CreateEventAPI from '../testData/apiRequest/CreateEventAPI.json';
 import BookEventAPI from '../testData/apiRequest/BookEventAPI.json';
+import { APIUtils } from '../utils/APIUtils';
 
 test(`Event ticket book API test`, async () => {
+
+    const apiUtils:APIUtils = new APIUtils();
 
     const apiContext = await request.newContext(
         {
@@ -14,14 +16,8 @@ test(`Event ticket book API test`, async () => {
 
     // Login API
 
-   const APIresponse = await apiContext.post("auth/login", {
-        data: LoginAPI
-    });
-
-    const loginApiResponseBody =  await APIresponse.json();
-    const token = await loginApiResponseBody.token;
+    const token = await apiUtils.generateToken(apiContext,"auth/login",LoginAPI);
     console.log("Here is the Token: "+ token);
-    expect(APIresponse.ok()).toBeTruthy();
 
     // Added Token to the header
 
@@ -31,36 +27,23 @@ test(`Event ticket book API test`, async () => {
 
     // Event Creation API
 
-    const EventAPIresponse = await apiContext.post("events", {
-        data: CreateEventAPI,
-        headers: header
-    });
-    
-   const EventAPIresponsePayload = await EventAPIresponse.json();
-   const eventid = await EventAPIresponsePayload.data.id;
-   console.log(`Here is the event id ${eventid}`);
-   expect(EventAPIresponse.ok()).toBeTruthy();
-
+    const EventAPIresponsePayload = await apiUtils.callPostAPI(apiContext,"events",CreateEventAPI,header)
+    const eventid = await EventAPIresponsePayload.data.id;
+    console.log(`Here is the event id ${eventid}`);
+   
    // Book that event ticket
 
-   BookEventAPI.eventId = eventid;
-    const BookEventAPIresponse = await apiContext.post("bookings", {
-        data: BookEventAPI,
-        headers: header
-    });
+    BookEventAPI.eventId = eventid;
 
-    const BookEventAPIresponsePayload = await BookEventAPIresponse.json();
+    const BookEventAPIresponsePayload = await apiUtils.callPostAPI(apiContext,"bookings",BookEventAPI,header)
     console.log(await BookEventAPIresponsePayload.message);
-    expect(BookEventAPIresponse.ok()).toBeTruthy();
-    
+
     // Delete that Event
 
-    const deleteEventAPI = await apiContext.delete(`events/${eventid}`, {
-        headers: header
-    });
+    const pathParams:any[] = [eventid]; // create an array of all path parameters
 
-    const deleteEventResponse = await deleteEventAPI.json();
+    const deleteEventResponse = await apiUtils.callDeleteAPI(apiContext,"events",header,pathParams);
     console.log(await deleteEventResponse.message);
-    expect(deleteEventAPI.ok()).toBeTruthy();
+
 
 });

@@ -4,14 +4,14 @@ import { LoginPage } from '../pageObjects/LoginPage'
 export class ObjectManager
 {
     private loginPage:LoginPage;
-    
 
     constructor(page:Page)
     {
         this.loginPage = new LoginPage(page);
     }
 
-    getLoginPage(){
+    getLoginPage():any
+    {
         return this.loginPage;
     }
 

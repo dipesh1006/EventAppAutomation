@@ -1,0 +1,11 @@
+{
+  "customerName": "Dipesh Pal",
+  "userPass": "Dipesh1234@",
+  "customerEmail": "dipesh16pal@gmail.com",
+  "customerPhone": "+91-9876543210",
+  "eventDetails": {
+        "eventName": "World Tech Summit",
+        "quantity": "4"
+    }
+  
+}

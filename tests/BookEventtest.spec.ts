@@ -4,17 +4,16 @@ import { ObjectManager } from '../pageObjects/ObjectManager';
 import { LoginPage } from '../pageObjects/LoginPage';
 import { EventsPage } from '../pageObjects/EventsPage';
 import { ConfirmationPage } from '../pageObjects/ConfirmationPage';
-import bookEventtestData from '../testData/bookEventtestData.json';
 import {customtest} from '../fixtures/bookEventsData';
 
 let objManager:ObjectManager;
 
-test.beforeEach("Login to the Application", async ({page})=> {
+customtest.beforeEach("Login to the Application", async ({page,bookEventsData})=> {
 
   await page.goto(BASE_URL);
   objManager = new ObjectManager(page);
   const loginPage:LoginPage = objManager.getLoginPage();
-  await loginPage.loginToEventapp(bookEventtestData.customerEmail,bookEventtestData.userPass);
+  await loginPage.loginToEventapp(bookEventsData.customerEmail,bookEventsData.userPass);
 
 })
 

@@ -5,6 +5,7 @@ import { LoginPage } from '../pageObjects/LoginPage';
 import { EventsPage } from '../pageObjects/EventsPage';
 import { ConfirmationPage } from '../pageObjects/ConfirmationPage';
 import bookEventtestData from '../testData/bookEventtestData.json';
+import {customtest} from '../fixtures/bookEventsData';
 
 let objManager:ObjectManager;
 
@@ -17,18 +18,18 @@ test.beforeEach("Login to the Application", async ({page})=> {
 
 })
 
-test("Book an Event", async ()=> {
+customtest("Book an Event", async ({bookEventsData})=> {
 
   const eventPage:EventsPage = objManager.getEventsPage();
   const confirmationPage:ConfirmationPage = objManager.getConfirmationPage();
 
   await eventPage.navigateToEventlist();
-  await eventPage.bookThisEvent(bookEventtestData.eventDetails.eventName);
+  await eventPage.bookThisEvent(bookEventsData.eventDetails.eventName);
   await confirmationPage.confirmEventTicket(
-    bookEventtestData.eventDetails.quantity,
-    bookEventtestData.customerName,
-    bookEventtestData.customerEmail,
-    bookEventtestData.customerPhone
+    bookEventsData.eventDetails.quantity,
+    bookEventsData.customerName,
+    bookEventsData.customerEmail,
+    bookEventsData.customerPhone
   );
 
 })

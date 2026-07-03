@@ -17,7 +17,7 @@ customtest.beforeEach("Login to the Application", async ({page,bookEventsData})=
 
 })
 
-customtest("Book an Event", async ({bookEventsData})=> {
+customtest("Book an Event", {tag: ['@web','@regression']}, async ({bookEventsData})=> {
 
   const eventPage:EventsPage = objManager.getEventsPage();
   const confirmationPage:ConfirmationPage = objManager.getConfirmationPage();

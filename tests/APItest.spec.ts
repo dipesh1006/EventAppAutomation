@@ -5,7 +5,7 @@ import CreateEventAPI from '../testData/apiRequest/CreateEventAPI.json';
 import BookEventAPI from '../testData/apiRequest/BookEventAPI.json';
 import { APIUtils } from '../utils/APIUtils';
 
-test(`Event ticket book API test`, async () => {
+test(`Event ticket book API test`, {tag: ['@API','@regression']} , async () => {
 
     const apiUtils:APIUtils = new APIUtils();
 

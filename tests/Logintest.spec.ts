@@ -7,7 +7,7 @@ const validCredential = logIn.validCredentials;
 const invalidCredential = logIn.invalidCredentials;
 
 validCredential.forEach((credential) => {
-test(`Login with valid credentials for username ${credential.username}`, async ({page}) => {
+test(`Login with valid credentials for username ${credential.username}`, {tag: ['@web','@smoke']}, async ({page}) => {
 
   await page.goto(BASE_URL);
   const objmanager = new ObjectManager(page);
@@ -21,7 +21,7 @@ test(`Login with valid credentials for username ${credential.username}`, async (
 
 invalidCredential.forEach(cred => {
 
-  test(`Login with invalid credentials for username ${cred.username}`, async ({page}) => {
+  test(`Login with invalid credentials for username ${cred.username}`, {tag: ['@web','@smoke']}, async ({page}) => {
 
   await page.goto(BASE_URL);
   const objmanager = new ObjectManager(page);

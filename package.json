@@ -3,7 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+
+    "web_chrome": "npx playwright test --grep=@web --project=chrome",
+    "web_safari": "npx playwright test --grep=@web --project=webkit",
+    "regression_chrome": "npx playwright test --grep=@regression --project=chrome",
+    "api_test": "npx playwright test --grep=@API --project=chrome"
+
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

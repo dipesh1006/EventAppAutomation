@@ -1,8 +1,8 @@
 import { test, expect, request } from '@playwright/test';
 import { API_BASE_URL } from '../utils/fetchenv';
-import LoginAPI from '../testData/apiRequest/LoginAPI.json';
-import CreateEventAPI from '../testData/apiRequest/CreateEventAPI.json';
-import BookEventAPI from '../testData/apiRequest/BookEventAPI.json';
+import { LoginAPIBuilder } from '../testData/apiRequest/LoginAPIBuilder';
+import { CreateEventAPIBuider } from '../testData/apiRequest/CreateEventAPIBuider';
+import { BookEventAPIBuilder } from '../testData/apiRequest/BookEventAPIBuilder';
 import { APIUtils } from '../utils/APIUtils';
 import { APIResource } from '../utils/APIResource';
 
@@ -15,26 +15,19 @@ test(`Event ticket book API test`, {tag: ['@API','@regression']} , async () => {
             baseURL: API_BASE_URL
         });
 
-    // Login API
-
-    const token = await apiUtils.generateToken(apiContext,APIResource.LoginAPI,LoginAPI);
-    console.log("Here is the Token: "+ token);
-
-    // Added Token to the header
-
-    const header = {
-        "authorization": "Bearer "+token
-    }
+    // Login API return the header with token
+    const LoginAPI = new LoginAPIBuilder().build();
+    const header:any = await apiUtils.generateToken(apiContext,APIResource.LoginAPI,LoginAPI);
 
     // Event Creation API
-
+    const CreateEventAPI = new CreateEventAPIBuider().build();
     const EventAPIresponsePayload = await apiUtils.callPostAPI(apiContext,APIResource.EventAPI,CreateEventAPI,header)
     const eventid = await EventAPIresponsePayload.data.id;
     console.log(`Here is the event id ${eventid}`);
    
    // Book that event ticket
-
-    BookEventAPI.eventId = eventid;
+    
+    const BookEventAPI = new BookEventAPIBuilder().setEventid(eventid).build();
 
     const BookEventAPIresponsePayload = await apiUtils.callPostAPI(apiContext,APIResource.BookEventAPI,BookEventAPI,header)
     console.log(await BookEventAPIresponsePayload.message);

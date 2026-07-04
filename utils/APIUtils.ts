@@ -3,7 +3,7 @@ import { APIRequestContext, expect } from "@playwright/test";
 export class APIUtils {
 
     
-    async generateToken(apiContext:APIRequestContext, apiResource:string,requestPayload:any):Promise<string>
+    async generateToken(apiContext:APIRequestContext, apiResource:string,requestPayload:any):Promise<any>
     {
         
         const APIresponse = await apiContext.post(apiResource, {
@@ -12,7 +12,10 @@ export class APIUtils {
         expect(APIresponse.ok()).toBeTruthy();
         const loginApiResponseBody =  await APIresponse.json();
         const token = await loginApiResponseBody.token;
-        return token;
+        const header = {
+        "authorization": "Bearer "+token
+        }
+        return header;
     }
 
 

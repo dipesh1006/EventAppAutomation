@@ -10,6 +10,8 @@ export class ConfirmationPage
     private userPhone:Locator;
     private confirmButton:Locator;
     private addTicketBtn: Locator;
+    private confirmMsg: Locator;
+
 
     constructor(page:Page)
     {
@@ -20,6 +22,7 @@ export class ConfirmationPage
         this.userPhone = page.locator("#phone");
         this.confirmButton = page.getByRole("button",{name: "Confirm Booking"});
         this.addTicketBtn = page.getByRole("button",{name: "+"});
+        this.confirmMsg = page.getByText("Booking Confirmed!");
 
     }
 
@@ -41,6 +44,7 @@ export class ConfirmationPage
         await this.utils.fillinputfield(this.userEmail,emailId);
         await this.utils.fillinputfield(this.userPhone,phNo);
         await this.utils.clickOnElement(this.confirmButton,"Confirm Button");
+        await expect(this.confirmMsg).toBeVisible();
     }
 
 

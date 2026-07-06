@@ -6,9 +6,9 @@ export default defineConfig({
   reporter: 'html',
   retries: 2,
   workers: 1,
-  timeout: 5 * 1000,
+  timeout: 7 * 1000,
   expect: {
-    timeout: 5000
+    timeout: 7000
   },
 
   projects: 

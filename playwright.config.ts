@@ -20,6 +20,10 @@ export default defineConfig({
       headless: false,
       screenshot: 'only-on-failure',
       trace: 'retain-on-failure',
+      launchOptions: {
+      args: ['--start-maximized'],
+      },
+      viewport: null,
       ignoreHTTPSErrors: true
       }
     },

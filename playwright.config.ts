@@ -4,7 +4,7 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
   reporter: 'html',
-  retries: 2,
+  retries: 0,
   workers: 1,
   timeout: 7 * 1000,
   expect: {

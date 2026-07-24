@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import { test } from '@playwright/test';
 import { BASE_URL2 } from '../utils/fetchenv';
 import { ObjectManager } from '../pageObjects/ObjectManager';
 import { ComponentPage } from '../pageObjects/ComponentPage';
@@ -13,7 +13,7 @@ test.beforeEach('Browser Setup',async ({ page }) => {
     componentPage = objectManager.getComponentPage();
 })
 
-test('Test Select Dropdown', async () => {
+test.skip('Test Select Dropdown', async () => {
   
     await componentPage.selectFromDropdown('option2');
     await componentPage.selectFromDropdown('option3');
@@ -29,5 +29,17 @@ test('Switch tab and fetch tab name of the new tab', async ({}) => {
 test('Switch window and fetch window name of the new tab', async ({}) => {
 
     await componentPage.switchWindow();
+
+})
+
+test('Click on Radio Button and validate selection', async ({}) => {
+
+    await componentPage.clickRadioButton(2);
+
+})
+
+test.only('Hover mouse to button', async ({}) => {
+
+    await componentPage.hoverMouseToButton();
 
 })

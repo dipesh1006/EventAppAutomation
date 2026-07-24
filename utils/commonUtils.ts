@@ -52,4 +52,13 @@ export class commonUtils
     }
 
 
+    async scrollToElement(element:Locator)
+    {
+        element.evaluate((eve)=> {
+        
+            eve.scrollIntoView();
+        })
+    }
+
+
 }
